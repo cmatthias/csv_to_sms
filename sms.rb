@@ -17,7 +17,7 @@ end
 
 messages_to_send = CSV.read('sms.csv')
 
-puts ['from','to','body','response_code','errs'].map{|e|'"'+e+'"'}.join(',')
+puts ['from','to','body','error_code','error_message'].map{|e|'"'+e+'"'}.join(',')
 messages_to_send.each do |to, body|
     from = froms.sample
     begin
