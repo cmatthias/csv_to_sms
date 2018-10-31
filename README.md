@@ -14,3 +14,11 @@ Then, do the following:
     * `FROM_NUMBERS=1234567890,2345678901`
        <-- This last one should be a comma-delimited list of valid Twilio numbers to send from
 1. `bundle exec ruby sms.rb`
+
+The script will spit out (to stdout, feel free to pipe to a file) a resulting CSV in the format of:
+
+```
+from,to,body,error_code,error_message
+```
+
+`error_code` and `error_message` will be blank if the twilio API request was successful.
