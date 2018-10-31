@@ -17,23 +17,21 @@ end
 
 messages_to_send = CSV.read('sms.csv')
 
-CSV.open('sms_sent.csv', 'wb') do |out_csv|
-    puts ['from','to','body','response_code','errs'].map{|e|'"'+e+'"'}.join(',')
-    messages_to_send.each do |to, body|
-        from = froms.sample
-        begin
-            error_code = ''
-            error_message = ''
-            client.messages.create(
-                from: from,
-                to: to,
-                body: body
-            )
-        rescue Twilio::REST::RequestError => e
-            error_code = e.code
-            error_message = e.message
-        ensure
-            puts [from, to, body, error_code, error_message].map{|e|'"'+e+'"'}.join(',')
-        end
+puts ['from','to','body','response_code','errs'].map{|e|'"'+e+'"'}.join(',')
+messages_to_send.each do |to, body|
+    from = froms.sample
+    begin
+        error_code = ''
+        error_message = ''
+        client.messages.create(
+            from: from,
+            to: to,
+            body: body
+        )
+    rescue Twilio::REST::RequestError => e
+        error_code = e.code
+        error_message = e.message
+    ensure
+        puts [from, to, body, error_code, error_message].map{|e|'"'+e+'"'}.join(',')
     end
 end
