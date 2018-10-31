@@ -21,8 +21,6 @@ CSV.open('sms_sent.csv', 'wb') do |out_csv|
     puts ['from','to','body','response_code','errs'].map{|e|'"'+e+'"'}.join(',')
     messages_to_send.each do |to, body|
         from = froms.sample
-        #r = { :from => from, :to => to, :body => body }
-        #puts r.to_s
         begin
             error_code = ''
             error_message = ''
@@ -39,9 +37,3 @@ CSV.open('sms_sent.csv', 'wb') do |out_csv|
         end
     end
 end
-
-#client.messages.create(
-#from: from,
-#to: to,
-#body: "Hey friend!"
-#)
