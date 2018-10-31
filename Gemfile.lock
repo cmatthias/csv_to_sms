@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    dotenv (2.5.0)
     faraday (0.15.3)
       multipart-post (>= 1.2, < 3)
     jwt (2.1.0)
@@ -17,6 +18,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  dotenv
   twilio-ruby
 
 BUNDLED WITH
