@@ -42,6 +42,9 @@ msgs.each do |msg|
     rescue Twilio::REST::RestError => e
         error_code = e.code
         error_message = e.message
+    rescue => other_e
+        error_code = "unknown"
+        error_message = other_e.message
     ensure
         puts [meta, from, to, body, error_code, error_message].map{|e|'"'+e+'"'}.join(',')
     end
