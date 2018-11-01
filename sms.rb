@@ -16,7 +16,6 @@ rescue
 end
 
 msgs = []
-puts ['from','to','body','error_code','error_message'].map{|e|'"'+e+'"'}.join(',')
 CSV.foreach('sms.csv') do |row|
     if row.size != 2
         # TODO: more error checking here? phone number format?
@@ -26,6 +25,7 @@ CSV.foreach('sms.csv') do |row|
     msgs << {to: row[0], from: froms.sample, body: row[1]}
 end
 
+puts ['from','to','body','error_code','error_message'].map{|e|'"'+e+'"'}.join(',')
 msgs.each do |msg|
     from = msg[:from]
     to = msg[:to]
