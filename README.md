@@ -24,7 +24,7 @@ Then, do the following:
     * `ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxx`
     * `AUTH_TOKEN=xxxxxxxx`
     * `FROM_NUMBERS=+11234567890,+12345678901`
-       <-- This last one should be a comma-delimited list of valid Twilio numbers to send from
+       <-- This last one should be a comma-delimited list of valid Twilio numbers to send from. The script will randomly choose one of these numbers to send each message from.
 1. Run the script and send some messages! `bundle exec ruby sms.rb`
 
 The script will print (to stdout) a resulting CSV in the format of:
