@@ -38,7 +38,7 @@ msgs.each do |msg|
             to: to,
             body: mbody
         )
-    rescue Twilio::REST::RequestError => e
+    rescue Twilio::REST::RestError => e
         error_code = e.code
         error_message = e.message
     ensure
