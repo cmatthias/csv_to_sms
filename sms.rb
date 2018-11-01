@@ -36,7 +36,7 @@ msgs.each do |msg|
         client.messages.create(
             from: from,
             to: to,
-            body: mbody
+            body: body
         )
     rescue Twilio::REST::RestError => e
         error_code = e.code
