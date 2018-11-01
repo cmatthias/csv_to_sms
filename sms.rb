@@ -15,18 +15,28 @@ rescue
     exit
 end
 
-messages_to_send = CSV.read('sms.csv')
-
+msgs = []
 puts ['from','to','body','error_code','error_message'].map{|e|'"'+e+'"'}.join(',')
-messages_to_send.each do |to, body|
-    from = froms.sample
+CSV.foreach('sms.csv') do |row|
+    if row.size != 2
+        # TODO: more error checking here? phone number format?
+        puts "Malformed row on line #{$INPUT_LINE_NUMBER} of input csv"
+        exit
+    end
+    msgs << {to: row[0], from: froms.sample, body: row[1]}
+end
+
+msgs.each do |msg|
+    from = msg[:from]
+    to = msg[:to]
+    body = msg[:body]
     begin
         error_code = ''
         error_message = ''
         client.messages.create(
             from: from,
             to: to,
-            body: body
+            body: mbody
         )
     rescue Twilio::REST::RequestError => e
         error_code = e.code
