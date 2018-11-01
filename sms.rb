@@ -17,19 +17,20 @@ end
 
 msgs = []
 CSV.foreach('sms.csv') do |row|
-    if row.size != 2
+    if row.size != 3
         # TODO: more error checking here? phone number format?
         puts "Malformed row on line #{$INPUT_LINE_NUMBER} of input csv"
         exit
     end
-    msgs << {to: row[0], from: froms.sample, body: row[1]}
+    msgs << {meta: row[0], to: row[1], from: froms.sample, body: row[2]}
 end
 
-puts ['from','to','body','error_code','error_message'].map{|e|'"'+e+'"'}.join(',')
+puts ['meta','from','to','body','error_code','error_message'].map{|e|'"'+e+'"'}.join(',')
 msgs.each do |msg|
     from = msg[:from]
     to = msg[:to]
     body = msg[:body]
+    meta = msg[:meta]
     begin
         error_code = ''
         error_message = ''
@@ -42,6 +43,6 @@ msgs.each do |msg|
         error_code = e.code
         error_message = e.message
     ensure
-        puts [from, to, body, error_code, error_message].map{|e|'"'+e+'"'}.join(',')
+        puts [meta, from, to, body, error_code, error_message].map{|e|'"'+e+'"'}.join(',')
     end
 end
