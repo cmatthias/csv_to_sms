@@ -25,7 +25,7 @@ CSV.foreach('sms.csv') do |row|
     msgs << {meta: row[0], to: row[1], from: froms.sample, body: row[2]}
 end
 
-puts ['meta','from','to','body','error_code','error_message'].map{|e|'"'+e+'"'}.join(',')
+puts ['meta','from','to','error_code','error_message'].map{|e|'"'+e+'"'}.join(',')
 msgs.each do |msg|
     from = msg[:from]
     to = msg[:to]
@@ -46,6 +46,6 @@ msgs.each do |msg|
         error_code = "unknown"
         error_message = other_e.message
     ensure
-        puts [meta, from, to, body, error_code, error_message].map{|e|'"'+e+'"'}.join(',')
+        puts [meta, from, to, error_code, error_message].map{|e|'"'+e.to_s+'"'}.join(',')
     end
 end
